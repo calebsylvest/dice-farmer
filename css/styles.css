@@ -1,0 +1,751 @@
+/* CSS Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-cream: #F5F5DC;
+  --brown-dark: #5D4037;
+  --brown-medium: #8B4513;
+  --brown-light: #A0522D;
+  --green-dark: #2E7D32;
+  --green-medium: #4CAF50;
+  --green-light: #81C784;
+  --gold: #FFD700;
+  --water-blue: #87CEEB;
+  --water-dark: #4A90D9;
+  --white: #FFFFFF;
+  --gray-light: #E0E0E0;
+  --gray-dark: #424242;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-cream);
+  color: var(--brown-dark);
+  min-height: 100vh;
+}
+
+#game-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+/* Header */
+#game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, var(--brown-medium), var(--brown-dark));
+  color: var(--white);
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.header-left, .header-right {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.header-center {
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--gold);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#turn-display {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#phase-display {
+  font-size: 14px;
+  opacity: 0.9;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 3px 10px;
+  border-radius: 15px;
+}
+
+#level-display {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#xp-display {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* Market Section */
+#market-section {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#market-section h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: var(--brown-dark);
+}
+
+#market-prices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.market-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gray-light);
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 16px;
+  transition: transform 0.2s;
+}
+
+.market-item.price-up {
+  background: #C8E6C9;
+}
+
+.market-item.price-down {
+  background: #FFCDD2;
+}
+
+.market-item .emoji {
+  font-size: 20px;
+}
+
+.market-item .price {
+  font-weight: bold;
+}
+
+.market-item .change {
+  font-size: 14px;
+}
+
+.change.up {
+  color: var(--green-dark);
+}
+
+.change.down {
+  color: #C62828;
+}
+
+/* Garden Section */
+#garden-section {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#garden-section h2 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: var(--brown-dark);
+}
+
+#garden-plots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.garden-plot {
+  background: var(--brown-medium);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.plot-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+}
+
+.garden-space {
+  width: 60px;
+  height: 60px;
+  background: #654321;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  border: 2px solid transparent;
+}
+
+.garden-space:hover {
+  background: #7B5B3A;
+  transform: scale(1.05);
+}
+
+.garden-space.has-crop {
+  background: #5D4037;
+}
+
+.garden-space.ready {
+  border-color: var(--green-light);
+  box-shadow: 0 0 10px var(--green-light);
+  animation: pulse-ready 1s infinite;
+}
+
+@keyframes pulse-ready {
+  0%, 100% { box-shadow: 0 0 5px var(--green-light); }
+  50% { box-shadow: 0 0 15px var(--green-light); }
+}
+
+.garden-space.preview {
+  background: #7B5B3A;
+  border: 2px dashed var(--green-medium);
+}
+
+.water-indicator {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  font-size: 12px;
+  display: flex;
+  gap: 1px;
+}
+
+.plot-label {
+  text-align: center;
+  color: var(--white);
+  font-size: 14px;
+  margin-top: 8px;
+  opacity: 0.9;
+}
+
+/* Buy Plot Button */
+.buy-plot-card {
+  width: 200px;
+  height: 220px;
+  background: linear-gradient(135deg, var(--gray-light), #BDBDBD);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: 3px dashed var(--brown-medium);
+}
+
+.buy-plot-card:hover {
+  background: linear-gradient(135deg, #E8E8E8, var(--gray-light));
+  transform: scale(1.02);
+}
+
+.buy-plot-card .icon {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.buy-plot-card .text {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--brown-dark);
+}
+
+.buy-plot-card .price {
+  font-size: 16px;
+  color: var(--brown-medium);
+  margin-top: 5px;
+}
+
+/* Dice Section */
+#dice-section {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#dice-inventory {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+#crop-dice, #water-dice {
+  flex: 1;
+  min-width: 200px;
+}
+
+#dice-inventory h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: var(--brown-dark);
+}
+
+#crop-dice-list, #water-dice-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.die-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  border: 3px solid var(--gray-light);
+  background: var(--white);
+  font-size: 28px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.die-button:hover {
+  transform: scale(1.1);
+  border-color: var(--brown-medium);
+}
+
+.die-button.selected {
+  border-color: var(--green-medium);
+  background: #E8F5E9;
+  box-shadow: 0 0 8px var(--green-medium);
+}
+
+.die-button.water {
+  background: linear-gradient(135deg, var(--water-blue), var(--water-dark));
+  color: var(--white);
+}
+
+/* Dice Results */
+#dice-results {
+  margin-bottom: 15px;
+  min-height: 80px;
+}
+
+#dice-results h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: var(--brown-dark);
+}
+
+#roll-results-display {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.die-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.die-face {
+  width: 60px;
+  height: 60px;
+  background: var(--white);
+  border: 3px solid var(--brown-dark);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  box-shadow: 3px 3px 0 var(--brown-medium);
+  position: relative;
+}
+
+.die-face.rolling {
+  animation: dice-roll 0.5s ease-in-out;
+}
+
+@keyframes dice-roll {
+  0% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(90deg) scale(1.1); }
+  50% { transform: rotate(180deg) scale(1); }
+  75% { transform: rotate(270deg) scale(1.1); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+.die-face .crop-icon {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  font-size: 16px;
+}
+
+.die-result-label {
+  font-size: 14px;
+  color: var(--brown-medium);
+}
+
+/* Phase Info */
+#phase-info {
+  text-align: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  background: #FFF8E1;
+  border-radius: 8px;
+  border-left: 4px solid var(--gold);
+}
+
+#phase-instructions {
+  font-size: 16px;
+  color: var(--brown-dark);
+}
+
+#placement-counter {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--green-dark);
+  margin-top: 5px;
+}
+
+/* Game Controls */
+#game-controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--green-medium), var(--green-dark));
+  color: var(--white);
+  box-shadow: 0 4px 0 #1B5E20;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #1B5E20;
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #1B5E20;
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, var(--brown-light), var(--brown-medium));
+  color: var(--white);
+  box-shadow: 0 4px 0 var(--brown-dark);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 var(--brown-dark);
+}
+
+/* Shop Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: var(--white);
+  border-radius: 15px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: linear-gradient(135deg, var(--brown-medium), var(--brown-dark));
+  color: var(--white);
+}
+
+.modal-header h2 {
+  font-size: 24px;
+}
+
+.btn-close {
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 30px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.btn-close:hover {
+  opacity: 0.8;
+}
+
+.shop-tabs {
+  display: flex;
+  background: var(--gray-light);
+}
+
+.shop-tab {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--brown-dark);
+}
+
+.shop-tab:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.shop-tab.active {
+  background: var(--white);
+  color: var(--green-dark);
+}
+
+#shop-content {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.shop-item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background: var(--gray-light);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  transition: all 0.2s;
+}
+
+.shop-item:hover {
+  background: #E0E0E0;
+}
+
+.shop-item .icon {
+  font-size: 36px;
+  margin-right: 15px;
+}
+
+.shop-item .info {
+  flex: 1;
+}
+
+.shop-item .name {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--brown-dark);
+}
+
+.shop-item .description {
+  font-size: 14px;
+  color: #666;
+  margin-top: 3px;
+}
+
+.shop-item .btn-buy {
+  padding: 8px 20px;
+  font-size: 14px;
+}
+
+.shop-item .btn-buy.owned {
+  background: var(--gray-light);
+  color: var(--green-dark);
+  box-shadow: none;
+}
+
+.modal-footer {
+  padding: 15px 20px;
+  background: var(--gray-light);
+  text-align: right;
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--brown-dark);
+}
+
+/* Achievement Popup */
+.achievement-popup {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, var(--gold), #FFA000);
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+  animation: slide-in 0.5s ease-out;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.achievement-content {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.achievement-icon {
+  font-size: 40px;
+}
+
+.achievement-text h3 {
+  font-size: 18px;
+  color: var(--brown-dark);
+}
+
+.achievement-text p {
+  font-size: 14px;
+  color: #5D4037;
+}
+
+/* Toast Messages */
+#toast-container {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1002;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast {
+  background: var(--brown-dark);
+  color: var(--white);
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-size: 16px;
+  animation: toast-in 0.3s ease-out;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.toast.success {
+  background: var(--green-dark);
+}
+
+.toast.error {
+  background: #C62828;
+}
+
+.toast.money {
+  background: linear-gradient(135deg, var(--gold), #FFA000);
+  color: var(--brown-dark);
+  font-weight: bold;
+}
+
+@keyframes toast-in {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #game-header {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .header-left, .header-right {
+    flex-direction: row;
+    gap: 15px;
+  }
+
+  .garden-space {
+    width: 50px;
+    height: 50px;
+    font-size: 26px;
+  }
+
+  #dice-inventory {
+    flex-direction: column;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .garden-space {
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+  }
+
+  .die-button {
+    width: 45px;
+    height: 45px;
+    font-size: 24px;
+  }
+
+  .market-item {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+}

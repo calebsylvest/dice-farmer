@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dice Farmer</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="game-container">
+    <!-- Header -->
+    <header id="game-header">
+      <div class="header-left">
+        <span id="turn-display">Turn 1</span>
+        <span id="phase-display">Market Phase</span>
+      </div>
+      <div class="header-center">
+        <span id="money-display">💰 $15</span>
+      </div>
+      <div class="header-right">
+        <span id="level-display">Level 1</span>
+        <span id="xp-display">XP: 0/50</span>
+      </div>
+    </header>
+
+    <!-- Market Prices -->
+    <section id="market-section">
+      <h2>Market Prices</h2>
+      <div id="market-prices"></div>
+    </section>
+
+    <!-- Garden Area -->
+    <section id="garden-section">
+      <h2>Your Garden</h2>
+      <div id="garden-plots"></div>
+    </section>
+
+    <!-- Dice & Controls Area -->
+    <section id="dice-section">
+      <div id="dice-inventory">
+        <div id="crop-dice">
+          <h3>Crop Dice</h3>
+          <div id="crop-dice-list"></div>
+        </div>
+        <div id="water-dice">
+          <h3>Water Dice 💧</h3>
+          <div id="water-dice-list"></div>
+        </div>
+      </div>
+
+      <div id="dice-results">
+        <h3>Roll Results</h3>
+        <div id="roll-results-display"></div>
+      </div>
+
+      <div id="phase-info">
+        <p id="phase-instructions"></p>
+        <p id="placement-counter"></p>
+      </div>
+
+      <div id="game-controls">
+        <button id="btn-roll" class="btn btn-primary">Roll Selected Dice</button>
+        <button id="btn-auto-fill" class="btn btn-secondary" style="display:none;">Auto-Fill</button>
+        <button id="btn-done-planting" class="btn btn-primary" style="display:none;">Done Planting</button>
+        <button id="btn-confirm-water" class="btn btn-primary" style="display:none;">Confirm Watering</button>
+        <button id="btn-shop" class="btn btn-secondary" style="display:none;">Shop</button>
+        <button id="btn-end-turn" class="btn btn-secondary" style="display:none;">End Turn</button>
+        <button id="btn-continue" class="btn btn-primary" style="display:none;">Continue</button>
+      </div>
+    </section>
+
+    <!-- Shop Modal -->
+    <div id="shop-modal" class="modal" style="display:none;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Shop</h2>
+          <button id="btn-close-shop" class="btn-close">&times;</button>
+        </div>
+        <div class="shop-tabs">
+          <button class="shop-tab active" data-tab="seeds">Seeds</button>
+          <button class="shop-tab" data-tab="garden">Garden</button>
+          <button class="shop-tab" data-tab="water">Water</button>
+          <button class="shop-tab" data-tab="upgrades">Upgrades</button>
+        </div>
+        <div id="shop-content"></div>
+        <div class="modal-footer">
+          <span id="shop-money">💰 $15</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Achievement Popup -->
+    <div id="achievement-popup" class="achievement-popup" style="display:none;">
+      <div class="achievement-content">
+        <span class="achievement-icon">🏆</span>
+        <div class="achievement-text">
+          <h3 id="achievement-title"></h3>
+          <p id="achievement-description"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Messages -->
+    <div id="toast-container"></div>
+  </div>
+
+  <script src="js/game.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/dice.js"></script>
+  <script src="js/shop.js"></script>
+  <script src="js/achievements.js"></script>
+  <script src="js/save.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
